@@ -100,3 +100,8 @@ docker run -v ./data:/backup:ro --env-file .env satoshiengineering/push2nextclou
 
 ### Hints
 - It should also work with a nextcloud user and password, but I think the link is different (because somehow the path must be somewhere)
+
+# Tip us
+
+If you like this project, please adapt the landingpage to your local stores, that
+accept bitcoin or even extend it. Why not [send some tip love?](https://legend.lnbits.com/tipjar/523)

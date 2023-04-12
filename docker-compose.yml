@@ -4,13 +4,14 @@ services:
     image: "backuper"
     container_name: "push2nextcloud"
     volumes:
-      - ../data:/data:ro
-    env_file:
-      - .env
-    #environment:
-    #  - SOURCE_FILE=/data/dumb.data
-    #  - DEST_FILE=dumb.data
+      - ../data:/backup:ro
+    environment:
+      - SOURCE_FILE=/data/dumb.data
+      - DEST_FILE=dumb.data
 
-    #  - NEXTCLOUD_USR=jack
-    #  - NEXTCLOUD_PWD=secret
-    #- NEXTCLOUD_URL=https://nextcloud.yourcompany.com/public.php/webdav/
+      - NEXTCLOUD_USR=jack
+      - NEXTCLOUD_PWD=secret
+      - NEXTCLOUD_URL=https://nextcloud.yourcompany.com/public.php/webdav/
+    # Optional run with .env file
+    # env_file:
+    #   - .env

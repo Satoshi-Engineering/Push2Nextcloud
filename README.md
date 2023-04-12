@@ -44,7 +44,7 @@ The last part is the ShareId or the "user" that we need for the tool `https://ne
 
 ### Run with docker-compose
 
-Copy the docker-compose example.
+[Copy](docker-compose.yml) or create the docker-compose.yml
 
 ```yaml
 version: "3.9"

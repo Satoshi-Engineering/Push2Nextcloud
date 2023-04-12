@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   backup:
-    image: "backuper"
+    image: "satoshiengineering/push2nextcloud:1.0.0"
     container_name: "push2nextcloud"
     volumes:
       - ../data:/backup:ro

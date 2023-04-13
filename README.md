@@ -4,10 +4,13 @@ _by the [#sathoshiengineeringcrew](https://satoshiengineering.com/)_
 
 [![MIT License Badge](docs/img/license-badge.svg)](LICENSE)
 
-Simple docker based backup solution for nextcloud users.
+Simple docker based backup solution for nextcloud users. It is a file change monitor that uploads the file on file change to a nextcloud share.
 
-It is a file change monitor that uploads the file on file change to a nextcloud share.
+Source can be found on [Github](https://github.com/Satoshi-Engineering/Push2Nextcloud).
 
+Uses cases:
+* Redis Database dumb
+* LND Static Channel Backup
 
 ## Usage
 
@@ -103,5 +106,4 @@ docker run -v ./data:/backup:ro --env-file .env satoshiengineering/push2nextclou
 
 # Tip us
 
-If you like this project, please adapt the landingpage to your local stores, that
-accept bitcoin or even extend it. Why not [send some tip love?](https://legend.lnbits.com/tipjar/523)
+If you like this project, why not [send some tip love?](https://legend.lnbits.com/tipjar/523)

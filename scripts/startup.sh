@@ -14,6 +14,9 @@ get_date () {
 # Monitoring function
 run () {
   while true; do
+      # Check if file exists
+      [ ! -e "$SOURCE_FILE" ] && { echo "$(get_date) 🚨 SOURCE_FILE: $SOURCE_FILE is missing or was removed!"; exit 1; }
+
       echo "$(get_date) 👀 Watching: $SOURCE_FILE"
       inotifywait --event modify $SOURCE_FILE
       echo "$(get_date) ➡️ $SOURCE_FILE has been changed!"

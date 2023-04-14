@@ -98,7 +98,7 @@ docker exec -it push2nextcloud /scripts/upload.sh
 
 ### Run with Docker and .env file
 ```shell
-docker run -v ./data:/backup:ro --env-file .env satoshiengineering/push2nextcloud:1.0.0 -d 
+docker run -d -v ./data:/backup:ro --env-file .env satoshiengineering/push2nextcloud:1.0.0 
 ```
 
 ### Hints

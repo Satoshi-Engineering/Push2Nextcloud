@@ -9,15 +9,16 @@ Simple docker based backup solution for nextcloud users. It is a file change mon
 Source can be found on [Github](https://github.com/Satoshi-Engineering/Push2Nextcloud).
 
 Uses cases:
-* Redis Database dumb
+* Redis Database dump
 * LND Static Channel Backup
 
 ## Usage
 
-Sadily it's not one of these out of the box projects. There are some steps that need to be done.
+Sadly it's not one of these out of the box projects. There are some steps that need to be done.
 
 1. Create Nextcloud Share
-2. Run with docker-compose
+2. Set Environment Variables
+3. Run with docker-compose
 
 ### Create Nextcloud Share
 
@@ -29,7 +30,7 @@ Sadily it's not one of these out of the box projects. There are some steps that 
 
 <img src="docs/img/share2.png" width="300"/>
 
-3. Choose "File Drop" which means even if someone get the url, the files can not be seen.
+3. Choose "File Drop" which means even if someone else discovers the url, the files can not be seen.
    - Also check "Hide download" and 
    - check "Password protect" and choose a good password, this will be your `NEXTCLOUD_PWD`
 
@@ -44,6 +45,17 @@ The last part is the ShareId or the "user" that we need for the tool `https://ne
 
 <img src="docs/img/share4.png" width="300"/>
 
+### Set Environment Variables
+
+Let's assume the watched file will be at `../data/dump.data`
+
+- Mount the directory of the watched file into the container e.g.  `../data:/backup:ro`
+- Set the watched file `SOURCE_FILE` to `/backup/dump.data`
+- The filename on nextcloud  will be generated with date & time like this `YYYY-MM-DD_HHMMSS-<DEST_FILE>`.
+  Example: `DEST_FILE=dump.data` generates `2022-03-30_130059-dump.data`.
+- Set `NEXTCLOUD_USR` to the last part of you share link: `https://nextcloud.yourcompany.com/s/<NEXTCLOUD_USR>`
+- Set `NEXTCLOUD_PWD` to the password set in Nextcloud
+- Set `NEXTCLOUD_URL` to your instance like `https://<YOUR NEXTCLOUD INSTANCE>/public.php/webdav/`
 
 ### Run with docker-compose
 
@@ -54,24 +66,19 @@ version: "3.9"
   
 services:
   push2next:
-    image: "satoshiengineering/push2nextcloud:1.0.0"
+    image: "satoshiengineering/push2nextcloud:latest"
     container_name: "push2nextcloud"
     volumes:
       - ../data:/backup:ro
       
     environment:
-      - SOURCE_FILE=/backup/dumb.data
-      - DEST_FILE=dumb.data
+      - SOURCE_FILE=/backup/dump.data
+      - DEST_FILE=dump.data
 
       - NEXTCLOUD_USR=jack
       - NEXTCLOUD_PWD=secret
-      - NEXTCLOUD_URL=https://nextcloud.yourcompany.com/public.php/webdav/
+      - NEXTCLOUD_URL=https://<YOUR NEXTCLOUD INSTANCE>/public.php/webdav/
 ```
-
-Let's assume the watched file will be `../data/dumb.data`
-
-- Change the mounted the directory into the container `../data:/backup:ro`
-- Edit the environment variables in the docker-compose file. An explanation of the environment variables [see here](.env.example).
 
 Run the docker-compose file:
 ```shell
@@ -98,7 +105,7 @@ docker exec -it push2nextcloud /scripts/upload.sh
 
 ### Run with Docker and .env file
 ```shell
-docker run -d -v ./data:/backup:ro --env-file .env satoshiengineering/push2nextcloud:1.0.0 
+docker run -d -v ./data:/backup:ro --env-file .env --name push2nextcloud satoshiengineering/push2nextcloud:latest
 ```
 
 ### Hints

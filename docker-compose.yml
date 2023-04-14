@@ -1,13 +1,13 @@
 version: "3.9"
 services:
   backup:
-    image: "satoshiengineering/push2nextcloud:1.0.0"
+    image: "satoshiengineering/push2nextcloud:latest"
     container_name: "push2nextcloud"
     volumes:
       - ../data:/backup:ro
     environment:
-      - SOURCE_FILE=/data/dumb.data
-      - DEST_FILE=dumb.data
+      - SOURCE_FILE=/data/dump.data
+      - DEST_FILE=dump.data
 
       - NEXTCLOUD_USR=jack
       - NEXTCLOUD_PWD=secret

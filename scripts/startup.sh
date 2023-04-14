@@ -25,6 +25,6 @@ run () {
   done
 }
 
-echo "$(get_date) ⚙️ Mode: Watch File Change"
+echo "$(get_date) ⚙️  Mode: Watch File Change"
 
 run

@@ -95,6 +95,10 @@ docker logs -n 200 -f push2nextcloud
 ### Trigger the Backup manually
 
 ```shell
+# either
+touch path/to/file.dump
+
+# or
 docker exec -it <container_name> /scripts/upload.sh
 ```
 

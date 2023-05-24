@@ -12,10 +12,10 @@ Uses cases:
 * Redis Database dump
 * LND Static Channel Backup
 
-There currently two upload modes:
+There currently two upload modes for nextcloud:
 
-- New File: On File Change the date&time is appended and the file uploaded
-- Overwrite Mode: The file is uploaded and overwritten
+- NewFile: On File Change the date&time is appended and the file uploaded e.g. `2022-03-30_130059-dump.data`
+- Overwrite: The file is uploaded and overwritten e.g. `dump.data`
 
 ## Usage
 
@@ -24,7 +24,6 @@ Sadly it's not one of these out of the box projects. There are some steps that n
 1. Create Nextcloud Share
 2. Set Environment Variables
 3. Run with docker-compose
-
 
 ### Create Nextcloud Share
 
@@ -36,13 +35,13 @@ Sadly it's not one of these out of the box projects. There are some steps that n
 
 <img src="docs/img/share2.png" width="300"/>
 
-3. Choose "File Drop" which means even if someone else discovers the url, the files can not be seen.
+3. Choose:
+   - For `NEXTCLOUD_UPLOAD_MODE=newfile` choose `File Drop` which means even if someone else discovers the url, the files can not be seen.
+   - For `NEXTCLOUD_UPLOAD_MODE=overwrite` choose `Allow upload and editing`
    - Also check "Hide download" and 
    - check "Password protect" and choose a good password, this will be your `NEXTCLOUD_PWD`
 
 <img src="docs/img/share3.png" width="300"/>
-
-
 
 4. Copy the Share link which looks like that:
 
@@ -59,11 +58,33 @@ Let's assume the watched file will be at `../data/dump.data`
 
 - Mount the directory of the watched file into the container e.g.  `../data:/backup:ro`
 - Set the watched file `SOURCE_FILE` to `/backup/dump.data`
-- The filename on nextcloud  will be generated with date & time like this `YYYY-MM-DD_HHMMSS-<DEST_FILE>`.
-  Example: `DEST_FILE=dump.data` generates `2022-03-30_130059-dump.data`.
 - Set `NEXTCLOUD_USR` to the last part of you share link: `https://nextcloud.yourcompany.com/s/<NEXTCLOUD_USR>`
 - Set `NEXTCLOUD_PWD` to the password set in Nextcloud
 - Set `NEXTCLOUD_URL` to your instance like `https://<YOUR NEXTCLOUD INSTANCE>/public.php/webdav/`
+
+#### NEXTCLOUD_UPLOAD_MODE's
+
+* `newfile`
+```
+NEXTCLOUD_UPLOAD_MODE=newfile
+```
+
+If not set or not recognized it will be mode "newfile" which means:
+ 
+The filename on nextcloud will be generated with date & time like this `YYYY-MM-DD_HHMMSS-<DEST_FILE>`.
+
+Example: `DEST_FILE=dump.data` generates `2022-03-30_130059-dump.data`.
+
+* `overwrite`
+
+```
+NEXTCLOUD_UPLOAD_MODE=overwrite
+```
+
+
+The filename on nextcloud will be `DEST_FILE`
+
+Example: `DEST_FILE=dump.data` generates `dump.data`.
 
 ### Run with docker-compose
 
@@ -120,8 +141,16 @@ docker exec -it push2nextcloud /scripts/upload.sh
 docker run -d -v ./data:/backup:ro --env-file .env --name push2nextcloud satoshiengineering/push2nextcloud:latest
 ```
 
-### Hints
+# Hints
 - It should also work with a nextcloud user and password, but I think the link is different (because somehow the path must be somewhere)
+
+- Overwriting is only with write permissions https://help.nextcloud.com/t/curl-upload-no-overwrite-possible/69970
+- Infos to Storage Quota & Versioned Files: https://docs.nextcloud.com/server/latest/user_manual/ar/files/quota.html
+> When version control is enabled, the older file versions are not counted against quotas.
+>
+> If you create a public share via URL and allow uploads, any uploaded files count against your quota
+>
+> Deleted files that are still in the trash bin do not count against quotas. The trash bin is set at 50% of quota. Deleted file aging is set at 30 days. When deleted files exceed 50% of quota then the oldest files are removed until the total is below 50%.
 
 # Tip us
 

@@ -12,6 +12,11 @@ Uses cases:
 * Redis Database dump
 * LND Static Channel Backup
 
+There currently two upload modes:
+
+- New File: On File Change the date&time is appended and the file uploaded
+- Overwrite Mode: The file is uploaded and overwritten
+
 ## Usage
 
 Sadly it's not one of these out of the box projects. There are some steps that need to be done.
@@ -19,6 +24,7 @@ Sadly it's not one of these out of the box projects. There are some steps that n
 1. Create Nextcloud Share
 2. Set Environment Variables
 3. Run with docker-compose
+
 
 ### Create Nextcloud Share
 
@@ -35,6 +41,8 @@ Sadly it's not one of these out of the box projects. There are some steps that n
    - check "Password protect" and choose a good password, this will be your `NEXTCLOUD_PWD`
 
 <img src="docs/img/share3.png" width="300"/>
+
+
 
 4. Copy the Share link which looks like that:
 

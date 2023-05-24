@@ -11,6 +11,8 @@ set -o pipefail
 [ -z "$NEXTCLOUD_PWD" ] && { echo "🚨 ENV: NEXTCLOUD_PWD missing!"; exit 2; }
 [ -z "$NEXTCLOUD_URL" ] && { echo "🚨 ENV: NEXTCLOUD_URL missing!"; exit 2; }
 
+[ -z "$NEXTCLOUD_UPLOAD_MODE" ] && { echo "ℹ️  ENV: NEXTCLOUD_UPLOAD_MODE not set. Setting to mode 'newfile'!"; NEXTCLOUD_UPLOAD_MODE="newfile"; }
+
 get_date () {
     date +[%Y-%m-%d\ %H:%M:%S]
 }
@@ -37,5 +39,6 @@ run_mode_file_change () {
 }
 
 echo "$(get_date) ⚙️  Mode: Watch File Change"
+echo "$(get_date) ⚙️  Upload Mode: $NEXTCLOUD_UPLOAD_MODE"
 
 run_mode_file_change

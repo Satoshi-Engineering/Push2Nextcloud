@@ -62,30 +62,6 @@ Let's assume the watched file will be at `../data/dump.data`
 - Set `NEXTCLOUD_PWD` to the password set in Nextcloud
 - Set `NEXTCLOUD_URL` to your instance like `https://<YOUR NEXTCLOUD INSTANCE>/public.php/webdav/`
 
-#### NEXTCLOUD_UPLOAD_MODE's
-
-* `newfile`
-```
-NEXTCLOUD_UPLOAD_MODE=newfile
-```
-
-If not set or not recognized it will be mode "newfile" which means:
- 
-The filename on nextcloud will be generated with date & time like this `YYYY-MM-DD_HHMMSS-<DEST_FILE>`.
-
-Example: `DEST_FILE=dump.data` generates `2022-03-30_130059-dump.data`.
-
-* `overwrite`
-
-```
-NEXTCLOUD_UPLOAD_MODE=overwrite
-```
-
-
-The filename on nextcloud will be `DEST_FILE`
-
-Example: `DEST_FILE=dump.data` generates `dump.data`.
-
 ### Run with docker-compose
 
 [Copy](docker-compose.yml) or create the docker-compose.yml
@@ -118,6 +94,41 @@ If you wanna check the logs
 ```shell
 docker logs -n 200 -f push2nextcloud
 ```
+
+## Configuration 
+
+Description can also be found in here [.env.example](.env.example) file.
+
+### NEXTCLOUD_UPLOAD_MODE's
+
+* `newfile`
+```
+NEXTCLOUD_UPLOAD_MODE=newfile
+```
+
+If not set or not recognized it will be mode "newfile" which means:
+
+The filename on nextcloud will be generated with date & time like this `YYYY-MM-DD_HHMMSS-<DEST_FILE>`.
+
+Example: `DEST_FILE=dump.data` generates `2022-03-30_130059-dump.data`.
+
+* `overwrite`
+
+```
+NEXTCLOUD_UPLOAD_MODE=overwrite
+```
+
+The filename on nextcloud will be `DEST_FILE`
+
+Example: `DEST_FILE=dump.data` generates `dump.data`.
+
+### DEST_FILE_TAR
+```
+DEST_FILE_TAR=true
+```
+Compresses the source file. This will add .tar.gz to the destination file.
+
+Example: `DEST_FILE=dump.data` generates `2022-03-30_130059-dump.data.tar.gz`.
 
 ## Notes
 

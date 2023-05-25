@@ -9,12 +9,12 @@ nano Dockerbuild
 ```
 2. build
 ```bash
-docker build -t satoshiengineering/push2nextcloud:1.X.X .
+docker build -t satoshiengineering/push2nextcloud:1.0.4 .
 ```
 
 3. Tag latest
 ```bash
-docker tag satoshiengineering/push2nextcloud:1.X.X satoshiengineering/push2nextcloud
+docker tag satoshiengineering/push2nextcloud:1.0.4 satoshiengineering/push2nextcloud
 ```
 
 4. Push it, Push it

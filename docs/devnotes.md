@@ -19,10 +19,16 @@ docker tag satoshiengineering/push2nextcloud:1.0.4 satoshiengineering/push2nextc
 
 4. Push it, Push it
 
+
+```bash
+docker push tag satoshiengineering/push2nextcloud:1.0.4
+docker push tag satoshiengineering/push2nextcloud
+```
+
 FYI: If you use `--all-tags` it will also push the old tags ... be carefull not to change old versions!
 
 ```bash
-docker push tag satoshiengineering/push2nextcloud
+docker push --all-tags satoshiengineering/push2nextcloud
 ```
 
 ## Run local in container

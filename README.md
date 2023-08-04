@@ -165,4 +165,4 @@ docker run -d -v ./data:/backup:ro --env-file .env --name push2nextcloud satoshi
 
 # Tip us
 
-If you like this project, why not [send some tip love?](https://legend.lnbits.com/tipjar/523)
+If you like this project, why not [send some tip love?](https://lnbits.thespielplatz.com/tipjar/2)

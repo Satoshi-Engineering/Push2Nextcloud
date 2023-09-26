@@ -1,5 +1,5 @@
 FROM alpine:3.17.3
-LABEL version="1.0.2"
+LABEL version="1.0.5"
 LABEL description="Simple docker based backup solution for nextcloud users."
 LABEL author="Satoshi Engineering"
 
@@ -11,4 +11,3 @@ ADD /src /app
 RUN chmod a+x /app/*.sh
 
 ENTRYPOINT ["/app/entrypoint.sh"]
-

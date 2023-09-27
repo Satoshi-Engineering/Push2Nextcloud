@@ -54,10 +54,12 @@ The last part is the ShareId or the "user" that we need for the tool `https://ne
 
 ### Set Environment Variables
 
-Let's assume the watched file will be at `../data/dump.data`
+Let's assume the watched file or directory will be at `../data/`
 
-- Mount the directory of the watched file into the container e.g.  `../data:/backup:ro`
-- Set the watched file `SOURCE_FILE` to `/backup/dump.data`
+- Mount the directory of the watched file/directory into the container e.g.  `../data:/backup:ro`
+- Set the either a watched file **or** directory
+  - set `SOURCE_FILE` to `/backup/dump.data`
+  - or `SOURCE_DIRECTORY` to `/backup/directory-with-data`
 - Set `NEXTCLOUD_USR` to the last part of you share link: `https://nextcloud.yourcompany.com/s/<NEXTCLOUD_USR>`
 - Set `NEXTCLOUD_PWD` to the password set in Nextcloud
 - Set `NEXTCLOUD_URL` to your instance like `https://<YOUR NEXTCLOUD INSTANCE>/public.php/webdav/`

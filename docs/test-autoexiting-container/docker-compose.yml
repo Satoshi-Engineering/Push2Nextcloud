@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  auto-exit:
+    image: alpine
+    container_name: auto-exit
+    deploy:
+      restart_policy:
+        condition: any
+    command: >
+      /bin/sh -c "
+      echo Starting at $(date);
+      for i in $(seq 10 -1 1);
+      do
+        echo tick;
+        sleep 1;
+      done;
+      echo Exiting at $(date);
+      exit 22;
+      "

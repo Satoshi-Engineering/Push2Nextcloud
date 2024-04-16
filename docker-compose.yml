@@ -3,6 +3,9 @@ services:
   backup:
     image: "satoshiengineering/push2nextcloud:1.0.4"
     container_name: "push2nextcloud"
+    deploy:
+      restart_policy:
+        condition: any    
     volumes:
       - ../data:/backup:ro
 #    environment:

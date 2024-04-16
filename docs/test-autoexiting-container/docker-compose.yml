@@ -3,9 +3,7 @@ services:
   auto-exit:
     image: alpine
     container_name: auto-exit
-    deploy:
-      restart_policy:
-        condition: any
+    restart: unless-stopped
     command: >
       /bin/sh -c "
       echo Starting at $(date);

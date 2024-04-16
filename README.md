@@ -75,9 +75,7 @@ services:
   push2next:
     image: "satoshiengineering/push2nextcloud:latest"
     container_name: "push2nextcloud"
-    deploy:
-      restart_policy:
-        condition: any
+    restart: unless-stopped
     volumes:
       - ../data:/backup:ro
       
@@ -136,13 +134,15 @@ Compresses the source file. This will add .tar.gz to the destination file.
 Example: `DEST_FILE=dump.data` generates `2022-03-30_130059-dump.data.tar.gz`.
 
 
-### Restarting policy of docker
+### Restarting policy of docker containers
 
-The restarting policy is set to any, which means is restarting the container on `exit != 0`, `exit == 0` and startup of the docker service.
+The restarting policy is set to `unless-stopped`, which means is restarting the container on `exit != 0`, `exit == 0` and startup of the docker service.
 
-If you wanna go more indepth: [restart_policy @ docker-compose](https://docs.docker.com/compose/compose-file/compose-file-v3/#restart_policy)
+If you wanna go more indepth: [restart @ docker-compose](https://docs.docker.com/compose/compose-file/compose-file-v3/#restart)
 
-*FYI: `restart_policy` is available in compose v3 and replaces `restart` form compose v2.*
+FYI:
+- The `restart` option is ignored when deploying a stack in swarm mode.
+- `restart_policy` is available in compose v3 and replaces `restart` compose v2.*
 
 ## Notes
 
